@@ -9,7 +9,9 @@ parserOptions:
   sourceType: module
 rules:
   no-console: 0
+  quotes: 0
   linebreak-style: 0
+  no-restricted-syntax: ["error", "FunctionExpression", "WithStatement", "BinaryExpression[operator='in']"]
   import/extensions: # FIXME: remove when rule will be adjusted for new nodejs version
     - error
     - ignorePackages
