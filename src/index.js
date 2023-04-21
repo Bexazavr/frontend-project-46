@@ -17,19 +17,19 @@ const genDiff = (filepath1, filepath2) => {
 
   const diff = sortedKeys.map((key) => {
     if (!Object.hasOwn(data1, key)) {
-      return ` + ${key}: ${data2[key]}`;
+      return `  + ${key}: ${data2[key]}`;
     }
     if (!Object.hasOwn(data2, key)) {
-      return ` - ${key}: ${data1[key]}`;
+      return `  - ${key}: ${data1[key]}`;
     }
     if (data1[key] !== data2[key]) {
-      return ` - ${key}: ${data1[key]}\n + ${key}: ${data2[key]}`;
+      return `  - ${key}: ${data1[key]}\n  + ${key}: ${data2[key]}`;
     }
-    return `   ${key}: ${data1[key]}`;
+    return `    ${key}: ${data1[key]}`;
   });
   const result = diff.join("\n");
 
-  return `\n{\n${result}\n}`;
+  return `{\n${result}\n}`;
 };
 
 export default genDiff;
