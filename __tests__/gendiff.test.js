@@ -22,3 +22,19 @@ test('flat JSON', () => {
   + verbose: true
 }`);
 });
+
+test('flat YAML', () => {
+  const filepath1 = getFixturePath("file1.yml");
+  const filepath2 = getFixturePath("file2.yml");
+
+  const actual1 = genDiff(filepath1, filepath2);
+
+  expect(actual1).toEqual(`{
+  - follow: false
+    host: hexlet.io
+  - proxy: 123.234.53.22
+  - timeout: 50
+  + timeout: 20
+  + verbose: true
+}`);
+});
