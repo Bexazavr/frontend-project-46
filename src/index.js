@@ -1,16 +1,18 @@
 import * as fs from "node:fs";
 import * as path from "path";
 import _ from "lodash";
+import parse from "./parsers.js";
+
+const getAbsolutePath = (filepath) => path.resolve(process.cwd(), filepath);
+const getFileExtenstion = (filepath) => path.extname(filepath).slice(1);
+const readFile = (filepath) => {
+  const data = fs.readFileSync(getAbsolutePath(filepath));
+  return parse(data, getFileExtenstion(filepath));
+};
 
 const genDiff = (filepath1, filepath2) => {
-  const absPath1 = path.resolve(filepath1);
-  const absPath2 = path.resolve(filepath2);
-
-  const file1 = fs.readFileSync(absPath1);
-  const file2 = fs.readFileSync(absPath2);
-
-  const data1 = JSON.parse(file1);
-  const data2 = JSON.parse(file2);
+  const data1 = readFile(filepath1);
+  const data2 = readFile(filepath2);
 
   const keys = _.union(_.keys(data1), _.keys(data2));
   const sortedKeys = _.sortBy(keys);
