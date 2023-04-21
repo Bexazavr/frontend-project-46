@@ -5,5 +5,8 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/6a587bf82e7e93ddc722/maintainability)](https://codeclimate.com/github/Bexazavr/frontend-project-46/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/6a587bf82e7e93ddc722/test_coverage)](https://codeclimate.com/github/Bexazavr/frontend-project-46/test_coverage)
 
-Step - 3 asciinema
+Step 3: Differences between flat JSON files.
 [![asciicast](https://asciinema.org/a/578300.svg)](https://asciinema.org/a/578300)
+
+Step 4: Differences between flat YAML files.
+[![asciicast](https://asciinema.org/a/579178.svg)](https://asciinema.org/a/579178)
