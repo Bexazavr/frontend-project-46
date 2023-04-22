@@ -8,7 +8,7 @@ const parse = (file, extension) => {
     case 'json':
       return JSON.parse(file);
     default:
-      throw new Error(`Wrong file extension!`);
+      throw new Error('Wrong file extension!');
   }
 };
 
