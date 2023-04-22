@@ -1,40 +1,29 @@
-import { fileURLToPath } from "url";
+import * as fs from 'node:fs';
+import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import genDiff from "../src/index.js";
+import genDiff from '../src/index.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const getFixturePath = (filename) => join(__dirname, "..", "__fixtures__", filename);
+const buildFixturePath = (filename) => join(__dirname, '..', '__fixtures__', filename);
+const readFixtureFile = (filename) => fs.readFileSync(buildFixturePath(filename), 'utf-8');
 
-test('flat JSON', () => {
-  const filepath1 = getFixturePath("file1.json");
-  const filepath2 = getFixturePath("file2.json");
+const extensions = ['json', 'yml'];
 
-  const actual1 = genDiff(filepath1, filepath2);
+const expectedStylish = readFixtureFile('stylish.txt');
 
-  expect(actual1).toEqual(`{
-  - follow: false
-    host: hexlet.io
-  - proxy: 123.234.53.22
-  - timeout: 50
-  + timeout: 20
-  + verbose: true
-}`);
+test.each(extensions)('compares 2 files and displays differences in set format', (extension) => {
+  const filepath1 = buildFixturePath(`file1.${extension}`);
+  const filepath2 = buildFixturePath(`file2.${extension}`);
+
+  expect(genDiff(filepath1, filepath2)).toEqual(expectedStylish);
+  expect(genDiff(filepath1, filepath2, 'stylish')).toEqual(expectedStylish);
 });
 
-test('flat YAML', () => {
-  const filepath1 = getFixturePath("file1.yml");
-  const filepath2 = getFixturePath("file2.yml");
+test('wrong extension', () => {
+  const filepath1 = buildFixturePath('stylish.txt');
+  const filepath2 = buildFixturePath('file2.json');
 
-  const actual1 = genDiff(filepath1, filepath2);
-
-  expect(actual1).toEqual(`{
-  - follow: false
-    host: hexlet.io
-  - proxy: 123.234.53.22
-  - timeout: 50
-  + timeout: 20
-  + verbose: true
-}`);
+  expect(() => { genDiff(filepath1, filepath2); }).toThrow(Error);
 });
