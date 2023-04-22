@@ -10,3 +10,6 @@ Flat JSON files.
 
 Flat YAML files.
 [![asciicast](https://asciinema.org/a/579178.svg)](https://asciinema.org/a/579178)
+
+Stylish formatter.
+[![asciicast](https://asciinema.org/a/579344.svg)](https://asciinema.org/a/579344)
