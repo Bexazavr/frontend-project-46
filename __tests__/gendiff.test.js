@@ -13,6 +13,7 @@ const extensions = ['json', 'yml'];
 
 const expectedStylish = readFixtureFile('stylish.txt');
 const expectedPlain = readFixtureFile('plain.txt');
+const expectedJSON = readFixtureFile('json.txt');
 
 test.each(extensions)('compares 2 files and displays differences in set format', (extension) => {
   const filepath1 = buildFixturePath(`file1.${extension}`);
@@ -21,6 +22,7 @@ test.each(extensions)('compares 2 files and displays differences in set format',
   expect(genDiff(filepath1, filepath2)).toEqual(expectedStylish);
   expect(genDiff(filepath1, filepath2, 'stylish')).toEqual(expectedStylish);
   expect(genDiff(filepath1, filepath2, 'plain')).toEqual(expectedPlain);
+  expect(genDiff(filepath1, filepath2, 'json')).toEqual(expectedJSON);
 });
 
 test('wrong extension', () => {
