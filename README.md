@@ -16,3 +16,6 @@ Stylish formatter.
 
 Plain formatter.
 [![asciicast](https://asciinema.org/a/579669.svg)](https://asciinema.org/a/579669)
+
+JSON formatter.
+[![asciicast](https://asciinema.org/a/579678.svg)](https://asciinema.org/a/579678)
