@@ -12,6 +12,7 @@ const readFixtureFile = (filename) => fs.readFileSync(buildFixturePath(filename)
 const extensions = ['json', 'yml'];
 
 const expectedStylish = readFixtureFile('stylish.txt');
+const expectedPlain = readFixtureFile('plain.txt');
 
 test.each(extensions)('compares 2 files and displays differences in set format', (extension) => {
   const filepath1 = buildFixturePath(`file1.${extension}`);
@@ -19,6 +20,7 @@ test.each(extensions)('compares 2 files and displays differences in set format',
 
   expect(genDiff(filepath1, filepath2)).toEqual(expectedStylish);
   expect(genDiff(filepath1, filepath2, 'stylish')).toEqual(expectedStylish);
+  expect(genDiff(filepath1, filepath2, 'plain')).toEqual(expectedPlain);
 });
 
 test('wrong extension', () => {
@@ -26,4 +28,11 @@ test('wrong extension', () => {
   const filepath2 = buildFixturePath('file2.json');
 
   expect(() => { genDiff(filepath1, filepath2); }).toThrow(Error);
+});
+
+test('wrong formatter', () => {
+  const filepath1 = buildFixturePath('file1.json');
+  const filepath2 = buildFixturePath('file2.json');
+
+  expect(() => { genDiff(filepath1, filepath2, 'test'); }).toThrow(Error);
 });
