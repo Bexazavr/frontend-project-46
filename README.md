@@ -13,3 +13,6 @@ Flat YAML files.
 
 Stylish formatter.
 [![asciicast](https://asciinema.org/a/579344.svg)](https://asciinema.org/a/579344)
+
+Plain formatter.
+[![asciicast](https://asciinema.org/a/579669.svg)](https://asciinema.org/a/579669)
