@@ -2,6 +2,8 @@ import * as fs from 'node:fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import genDiff from '../src/index.js';
+import formatPlain from '../src/formatters/plain.js';
+import formatStylish from '../src/formatters/stylish.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -25,7 +27,7 @@ test.each(extensions)('compares 2 files and displays differences in set format',
   expect(genDiff(filepath1, filepath2, 'json')).toEqual(expectedJSON);
 });
 
-test('wrong extension', () => {
+test('wrong format', () => {
   const filepath1 = buildFixturePath('stylish.txt');
   const filepath2 = buildFixturePath('file2.json');
 
@@ -37,4 +39,9 @@ test('wrong formatter', () => {
   const filepath2 = buildFixturePath('file2.json');
 
   expect(() => { genDiff(filepath1, filepath2, 'test'); }).toThrow(Error);
+});
+
+test('wrong node', () => {
+  expect(() => { formatPlain([{ value: null }]); }).toThrow(Error);
+  expect(() => { formatStylish([{ value: null }]); }).toThrow(Error);
 });
